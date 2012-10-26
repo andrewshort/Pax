@@ -19,6 +19,7 @@ namespace PaxService
 
         protected override void OnStart(string[] args)
         {
+            // test commit
         }
 
         protected override void OnStop()
