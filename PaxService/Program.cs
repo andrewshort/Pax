@@ -8,6 +8,8 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Common.Interfaces;
+using PaxService.Packet;
 
 namespace PaxService
 {
@@ -25,7 +27,7 @@ namespace PaxService
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[] 
 			{ 
-				new Service1() 
+				ContainerManager.Resolve<Service1>() 
 			};
             ServiceBase.Run(ServicesToRun);
             }
@@ -51,6 +53,14 @@ namespace PaxService
         {
             container.Bind<Service1>().ToSelf();
             container.Bind<IListenerService>().To<ListenerService>();
+            container.Bind<IConfigManager>().To<ConfigManager>();
+            container.Bind<ITcpListenerAdapter>().To<TcpListenerAdapter>();
+            container.Bind<ICheckSum>().To<CheckSum>();
+            container.Bind<IEncodingAdapter>().To<EncodingAdapter>();
+            container.Bind<IMessageProcessor>().To<MessageProcessor>();
+            container.Bind<IMessageBuilder>().To<MessageBuilder>();
+            container.Bind<ICommunicationParser>().To<CommunicationParser>();
+            container.Bind<ILogger>().To<Logger>();
         }
     }
 }

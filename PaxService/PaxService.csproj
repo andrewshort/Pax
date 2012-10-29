@@ -45,8 +45,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Listener\AsyncInfo.cs" />
+    <Compile Include="Listener\CommunicationParser.cs" />
+    <Compile Include="Listener\ICommunicationParser.cs" />
+    <Compile Include="Listener\IMessageProcessor.cs" />
+    <Compile Include="Listener\ITcpListenerAdapter.cs" />
     <Compile Include="Listener\IListenerService.cs" />
     <Compile Include="Listener\ListenerService.cs" />
+    <Compile Include="Listener\MessageProcessor.cs" />
+    <Compile Include="Listener\TcpListenerAdapter.cs" />
+    <Compile Include="Packet\IMessageBuilder.cs" />
+    <Compile Include="Packet\MessageBuilder.cs" />
     <Compile Include="Service1.cs">
       <SubType>Component</SubType>
     </Compile>
