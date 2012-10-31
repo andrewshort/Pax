@@ -46,8 +46,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\ParseException.cs" />
+    <Compile Include="Handlers\AvrmcHandler.cs" />
     <Compile Include="Handlers\AvsysHandler.cs" />
+    <Compile Include="Handlers\EChkHandler.cs" />
+    <Compile Include="Handlers\Interfaces\IAvrmcHandler.cs" />
     <Compile Include="Handlers\Interfaces\IAvsysHandler.cs" />
+    <Compile Include="Handlers\Interfaces\IEchkHandler.cs" />
     <Compile Include="Listener\AsyncInfo.cs" />
     <Compile Include="Listener\CommunicationParser.cs" />
     <Compile Include="Listener\ICommunicationParser.cs" />
@@ -57,11 +61,19 @@
     <Compile Include="Listener\ListenerService.cs" />
     <Compile Include="Listener\MessageProcessor.cs" />
     <Compile Include="Listener\TcpListenerAdapter.cs" />
+    <Compile Include="Model\Attributes\StringValue.cs" />
     <Compile Include="Model\AvsysObject.cs" />
+    <Compile Include="Model\AvrmcObject.cs" />
+    <Compile Include="Model\Enum\EventType.cs" />
+    <Compile Include="Model\Interfaces\IAvrmcObject.cs" />
     <Compile Include="Model\Interfaces\IAvsysObject.cs" />
     <Compile Include="Packet\IMessageBuilder.cs" />
+    <Compile Include="Packet\IMessageWriter.cs" />
     <Compile Include="Packet\MessageBuilder.cs" />
+    <Compile Include="Packet\MessageWriter.cs" />
+    <Compile Include="Parsers\AvrmcParser.cs" />
     <Compile Include="Parsers\AvsysParser.cs" />
+    <Compile Include="Parsers\Interfaces\IAvrmcParser.cs" />
     <Compile Include="Parsers\Interfaces\IAvsysParser.cs" />
     <Compile Include="Service1.cs">
       <SubType>Component</SubType>

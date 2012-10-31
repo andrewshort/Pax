@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common.Interfaces;
+using PaxService.Model.Interfaces;
 
 namespace PaxService.Packet
 {
@@ -21,6 +22,23 @@ namespace PaxService.Packet
         public string AvRequest()
         {
             return string.Format("{0}*{1}{2}", AVREQ, _checkSum.Calculate(AVREQ), Environment.NewLine);
+        }
+
+
+        public string Echk(string sentence)
+        {
+            return string.Format("{0}{1}{2}", "$", sentence, Environment.NewLine);
+        }
+
+
+        public string Ack(IAvrmcObject avrmc)
+        {
+            return string.Format("EAVACK,{0},{1}", avrmc.EventCode, avrmc.CheckSum);
+        }
+
+        public string AvcfgAck(IAvrmcObject avrmc, char code)
+        {
+            return string.Format("AVCFG,{0},{1}", "00000000");
         }
     }
 }

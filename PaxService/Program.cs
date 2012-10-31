@@ -10,6 +10,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using Common.Interfaces;
 using PaxService.Packet;
+using PaxService.Model.Enum;
+using PaxService.Model.Interfaces;
+using PaxService.Model;
+using PaxService.Parsers;
+using PaxService.Parsers.Interfaces;
+using PaxService.Handlers.Interfaces;
+using PaxService.Handlers;
 
 namespace PaxService
 {
@@ -59,8 +66,21 @@ namespace PaxService
             container.Bind<IEncodingAdapter>().To<EncodingAdapter>();
             container.Bind<IMessageProcessor>().To<MessageProcessor>();
             container.Bind<IMessageBuilder>().To<MessageBuilder>();
+            container.Bind<IMessageWriter>().To<MessageWriter>();
             container.Bind<ICommunicationParser>().To<CommunicationParser>();
             container.Bind<ILogger>().To<Logger>();
+
+            container.Bind<IEventTypeParser>().To<EventTypeParser>();
+
+            container.Bind<IAvsysObject>().To<AvsysObject>();
+            container.Bind<IAvrmcObject>().To<AvrmcObject>();
+
+            container.Bind<IAvrmcParser>().To<AvrmcParser>();
+            container.Bind<IAvsysParser>().To<AvsysParser>();
+
+            container.Bind<IAvrmcHandler>().To<AvrmcHandler>();
+            container.Bind<IAvsysHandler>().To<AvsysHandler>();
+            container.Bind<IEchkHandler>().To<EChkHandler>();
         }
     }
 }

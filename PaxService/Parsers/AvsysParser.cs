@@ -39,6 +39,8 @@ namespace PaxService.Parsers
             avsys.SerialNumber = parameters[3];
             avsys.MemorySize = Convert.ToInt32(parameters[4]);
 
+            avsys.Sentence = sentence;
+
             return avsys;
         }
     }

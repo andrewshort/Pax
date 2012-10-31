@@ -12,8 +12,13 @@ namespace Common
     {
         public void LogException(Exception ex)
         {
-            // TODO: implement NLog
             Debug.WriteLine(ex.Message);
+        }
+
+
+        public void LogMessage(string message)
+        {
+            Debug.WriteLine(message);
         }
     }
 }

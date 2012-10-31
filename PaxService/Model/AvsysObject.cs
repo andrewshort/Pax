@@ -32,5 +32,12 @@ namespace PaxService.Model
             get;
             set;
         }
+
+
+        public string Sentence
+        {
+            get;
+            set;
+        }
     }
 }

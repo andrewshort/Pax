@@ -12,5 +12,7 @@ namespace PaxService.Model.Interfaces
         string FirmwareVersion { get; set; }
         string SerialNumber { get; set; }
         int MemorySize { get; set; }
+
+        string Sentence { get; set; }
     }
 }
