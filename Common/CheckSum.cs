@@ -31,5 +31,18 @@ namespace Common
 
             return CheckSum.ToString("X2");
         }
+
+
+
+        public bool IsValid(string sentence)
+        {
+            if (string.IsNullOrEmpty(sentence))
+                return false;
+
+            if (!sentence.Contains("*"))
+                return false;
+
+            return Calculate(sentence).Equals(sentence.Split('*')[1].Trim());
+        }
     }
 }

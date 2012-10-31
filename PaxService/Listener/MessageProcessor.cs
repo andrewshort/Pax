@@ -21,21 +21,28 @@ namespace PaxService.Listener
         {
             if (!string.IsNullOrEmpty(message))
             {
-                var validSentences = message.Split('$').Where(x => IsValid(x)).Select(x => x.Trim());
+                var validSentences = message.Split('$').Where(x => _checkSum.IsValid(x)).Select(x => x.Trim());
 
-                //Process(validSentences, client);
+                foreach (var sentence in validSentences)
+                {
+                    var sentenceType = sentence.Split(',')[0];
+
+                    switch (sentenceType)
+                    {
+                        case "AVRMC":
+
+                            break;
+                        case "AVSYS":
+
+                            break;
+
+                        case "ECHK":
+
+                            break;
+
+                    }
+                }
             }
-        }
-
-        public bool IsValid(string sentence)
-        {
-            if (string.IsNullOrEmpty(sentence))
-                return false;
-
-            if (!sentence.Contains("*"))
-                return false;
-
-            return _checkSum.Calculate(sentence).Equals(sentence.Split('*')[1].Trim());
         }
     }
 }

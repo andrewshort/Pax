@@ -45,6 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\ParseException.cs" />
+    <Compile Include="Handlers\AvsysHandler.cs" />
+    <Compile Include="Handlers\Interfaces\IAvsysHandler.cs" />
     <Compile Include="Listener\AsyncInfo.cs" />
     <Compile Include="Listener\CommunicationParser.cs" />
     <Compile Include="Listener\ICommunicationParser.cs" />
@@ -54,8 +57,12 @@
     <Compile Include="Listener\ListenerService.cs" />
     <Compile Include="Listener\MessageProcessor.cs" />
     <Compile Include="Listener\TcpListenerAdapter.cs" />
+    <Compile Include="Model\AvsysObject.cs" />
+    <Compile Include="Model\Interfaces\IAvsysObject.cs" />
     <Compile Include="Packet\IMessageBuilder.cs" />
     <Compile Include="Packet\MessageBuilder.cs" />
+    <Compile Include="Parsers\AvsysParser.cs" />
+    <Compile Include="Parsers\Interfaces\IAvsysParser.cs" />
     <Compile Include="Service1.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -74,6 +81,7 @@
       <Name>Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

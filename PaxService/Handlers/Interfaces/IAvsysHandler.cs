@@ -5,10 +5,10 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PaxService.Listener
+namespace PaxService.Handlers.Interfaces
 {
-    public interface IMessageProcessor
+    public interface IAvsysHandler
     {
-        void Process(string message, TcpClient client);
+        void Handle(string sentence, TcpClient client);
     }
 }

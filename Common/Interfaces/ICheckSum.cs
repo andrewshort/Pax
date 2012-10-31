@@ -9,5 +9,6 @@ namespace Common.Interfaces
     public interface ICheckSum
     {
         string Calculate(string message);
+        bool IsValid(string sentence);
     }
 }
