@@ -1,4 +1,5 @@
 ﻿using Common.Interfaces;
+using Pax.Data.Interfaces;
 using PaxService.Handlers.Interfaces;
 using PaxService.Model.Interfaces;
 using PaxService.Packet;
@@ -16,11 +17,13 @@ namespace PaxService.Handlers
     {
         private IAvsysParser _parser;
         private ILogger _logger;
+        private IDeviceRepository _deviceRepository;
 
-        public AvsysHandler(IAvsysParser parser, ILogger logger)
+        public AvsysHandler(IAvsysParser parser, ILogger logger, IDeviceRepository deviceRepository)
         {
             this._parser = parser;
             this._logger = logger;
+            this._deviceRepository = deviceRepository;
         }
 
         public void Handle(string sentence, TcpClient client)
@@ -31,7 +34,8 @@ namespace PaxService.Handlers
                 return;
             }
 
-            // TODO: INSERT INTO DB, update device info, etc
+            _deviceRepository.UpdateDevice(avsys.UnitID, avsys.FirmwareVersion, avsys.SerialNumber, avsys.MemorySize);
+
             _logger.LogMessage(avsys.Sentence);
         }
     }

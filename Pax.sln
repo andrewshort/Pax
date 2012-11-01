@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceTests", "ServiceTest
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UITests", "UITests\UITests.csproj", "{A393C3FF-AB18-4E0C-986F-B9709C1A7F87}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaxModel", "PaxModel\PaxModel.csproj", "{0D8CA85C-E28A-4FD3-9EDF-FD12E8CD046E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pax.Data", "Pax.Data\Pax.Data.csproj", "{BE20354F-FEC2-4B93-BC6A-4B81CB56CD48}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{A393C3FF-AB18-4E0C-986F-B9709C1A7F87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A393C3FF-AB18-4E0C-986F-B9709C1A7F87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A393C3FF-AB18-4E0C-986F-B9709C1A7F87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D8CA85C-E28A-4FD3-9EDF-FD12E8CD046E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D8CA85C-E28A-4FD3-9EDF-FD12E8CD046E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D8CA85C-E28A-4FD3-9EDF-FD12E8CD046E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D8CA85C-E28A-4FD3-9EDF-FD12E8CD046E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE20354F-FEC2-4B93-BC6A-4B81CB56CD48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE20354F-FEC2-4B93-BC6A-4B81CB56CD48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE20354F-FEC2-4B93-BC6A-4B81CB56CD48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE20354F-FEC2-4B93-BC6A-4B81CB56CD48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

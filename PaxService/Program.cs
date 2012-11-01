@@ -17,6 +17,8 @@ using PaxService.Parsers;
 using PaxService.Parsers.Interfaces;
 using PaxService.Handlers.Interfaces;
 using PaxService.Handlers;
+using Pax.Data.Interfaces;
+using Pax.Data;
 
 namespace PaxService
 {
@@ -81,6 +83,8 @@ namespace PaxService
             container.Bind<IAvrmcHandler>().To<AvrmcHandler>();
             container.Bind<IAvsysHandler>().To<AvsysHandler>();
             container.Bind<IEchkHandler>().To<EChkHandler>();
+
+            container.Bind<IDeviceRepository>().To<DeviceRepository>();
         }
     }
 }

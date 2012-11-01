@@ -92,6 +92,14 @@
       <Project>{450b72ad-8b0d-4aa3-9031-6ee55cbf8880}</Project>
       <Name>Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Pax.Data\Pax.Data.csproj">
+      <Project>{be20354f-fec2-4b93-bc6a-4b81cb56cd48}</Project>
+      <Name>Pax.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PaxModel\PaxModel.csproj">
+      <Project>{0d8ca85c-e28a-4fd3-9edf-fd12e8cd046e}</Project>
+      <Name>PaxModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
