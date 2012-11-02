@@ -10,6 +10,12 @@ namespace Common
 {
     public class Logger : ILogger
     {
+
+        public Logger()
+        {
+            
+        }
+
         public void LogException(Exception ex)
         {
             Debug.WriteLine(ex.Message);
