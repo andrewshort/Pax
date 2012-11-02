@@ -11,7 +11,6 @@ namespace PaxService.Packet
 {
     public class MessageBuilder : IMessageBuilder
     {
-        private const string AVREQ = "$AVREQ,?";
         private ICheckSum _checkSum;
 
         public MessageBuilder(ICheckSum checkSum)
@@ -21,15 +20,13 @@ namespace PaxService.Packet
 
         public string AvRequest()
         {
-            return string.Format("{0}*{1}{2}", AVREQ, _checkSum.Calculate(AVREQ), Environment.NewLine);
+            return "$AVREQ,?";
         }
-
 
         public string Echk(string sentence)
         {
             return string.Format("{0}{1}{2}", "$", sentence, Environment.NewLine);
         }
-
 
         public string Ack(IAvrmcObject avrmc)
         {

@@ -1,4 +1,5 @@
 ﻿using PaxService.Listener;
+using PaxService.Packet;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,10 +15,12 @@ namespace PaxService
     public partial class Service1 : ServiceBase
     {
         private IListenerService _listenerService;
+        private ICommandService _commandService;
 
-        public Service1(IListenerService listenerService)
+        public Service1(IListenerService listenerService, ICommandService commandService)
         {
             _listenerService = listenerService;
+            _commandService = commandService;
 
             InitializeComponent();
         }
@@ -30,11 +33,13 @@ namespace PaxService
         public void Run()
         {
             _listenerService.Start();
+            _commandService.Start();
         }
 
         protected override void OnStop()
         {
             _listenerService.Stop();
+            _commandService.Stop();
         }
     }
 }

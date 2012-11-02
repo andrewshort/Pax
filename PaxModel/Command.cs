@@ -12,21 +12,12 @@ namespace PaxModel
     using System;
     using System.Collections.Generic;
     
-    public partial class Device
+    public partial class Command
     {
-        public Device()
-        {
-            this.Commands = new HashSet<Command>();
-            this.Tracks = new HashSet<Track>();
-        }
-    
+        public int CommandID { get; set; }
+        public string CommandText { get; set; }
         public int DeviceID { get; set; }
-        public int UnitID { get; set; }
-        public string FirmwareVersion { get; set; }
-        public string SerialNumber { get; set; }
-        public int MemorySize { get; set; }
     
-        public virtual ICollection<Command> Commands { get; set; }
-        public virtual ICollection<Track> Tracks { get; set; }
+        public virtual Device Device { get; set; }
     }
 }

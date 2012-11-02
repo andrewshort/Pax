@@ -12,21 +12,17 @@ namespace PaxModel
     using System;
     using System.Collections.Generic;
     
-    public partial class Device
+    public partial class Track
     {
-        public Device()
-        {
-            this.Commands = new HashSet<Command>();
-            this.Tracks = new HashSet<Track>();
-        }
-    
+        public int TrackID { get; set; }
         public int DeviceID { get; set; }
-        public int UnitID { get; set; }
-        public string FirmwareVersion { get; set; }
-        public string SerialNumber { get; set; }
-        public int MemorySize { get; set; }
+        public System.DateTime ReportDateTime { get; set; }
+        public System.Data.Spatial.DbGeometry LatLon { get; set; }
+        public string Heading { get; set; }
+        public string EventCode { get; set; }
+        public int Mileage { get; set; }
+        public System.DateTime CreateDate { get; set; }
     
-        public virtual ICollection<Command> Commands { get; set; }
-        public virtual ICollection<Track> Tracks { get; set; }
+        public virtual Device Device { get; set; }
     }
 }

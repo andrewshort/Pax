@@ -17,23 +17,21 @@ namespace PaxService.Listener
         private IMessageProcessor _messageProcessor;
         private IEncodingAdapter _encodingAdapter;
         private ILogger _logger;
+        private IMessageWriter _messageWriter;
 
-        public CommunicationParser(IMessageBuilder messageBuilder, IMessageProcessor messageProcessor, IEncodingAdapter encodingAdapter, ILogger logger)
+        public CommunicationParser(IMessageBuilder messageBuilder, IMessageProcessor messageProcessor, IEncodingAdapter encodingAdapter, ILogger logger, IMessageWriter messageWriter)
         {
             this._messageBuilder = messageBuilder;
             this._messageProcessor = messageProcessor;
             this._encodingAdapter = encodingAdapter;
             this._logger = logger;
+            this._messageWriter = messageWriter;
         }
 
         public void HandleCommunication(TcpClient client)
         {
-            var stream = new StreamWriter(client.GetStream());
-
             // send $AVREQ,?*CHKSUM
-            var requestMessage = _messageBuilder.AvRequest();
-            stream.Write(requestMessage);
-            stream.Flush();
+            _messageWriter.WriteMessage(_messageBuilder.AvRequest(), client);
 
             var buffer = new byte[client.ReceiveBufferSize];
             client.GetStream().BeginRead(buffer, 0, client.ReceiveBufferSize, ReceiveMessage, new AsyncInfo(buffer, client));

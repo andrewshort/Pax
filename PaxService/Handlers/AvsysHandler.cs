@@ -18,12 +18,14 @@ namespace PaxService.Handlers
         private IAvsysParser _parser;
         private ILogger _logger;
         private IDeviceRepository _deviceRepository;
+        private ICommandService _commandService;
 
-        public AvsysHandler(IAvsysParser parser, ILogger logger, IDeviceRepository deviceRepository)
+        public AvsysHandler(IAvsysParser parser, ILogger logger, IDeviceRepository deviceRepository, ICommandService commandService)
         {
             this._parser = parser;
             this._logger = logger;
             this._deviceRepository = deviceRepository;
+            this._commandService = commandService;
         }
 
         public void Handle(string sentence, TcpClient client)
@@ -35,6 +37,8 @@ namespace PaxService.Handlers
             }
 
             _deviceRepository.UpdateDevice(avsys.UnitID, avsys.FirmwareVersion, avsys.SerialNumber, avsys.MemorySize);
+            
+            _commandService.RegisterClient(avsys.UnitID, client);
 
             _logger.LogMessage(avsys.Sentence);
         }

@@ -6,6 +6,10 @@
     <edmx:Diagrams>
       <Diagram DiagramId="e921ef911d41479f893fc3ce46374aa3" Name="Diagram1">
         <EntityTypeShape EntityType="PaxModel.Device" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PaxModel.Command" Width="1.5" PointX="3.375" PointY="0.5" />
+        <EntityTypeShape EntityType="PaxModel.Track" Width="1.5" PointX="6.375" PointY="2" />
+        <AssociationConnector Association="PaxModel.FK_Command_Device" />
+        <AssociationConnector Association="PaxModel.FK_Track_Device" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -8,28 +8,27 @@ using System.Threading.Tasks;
 
 namespace Pax.Data
 {
-    public class DeviceRepository : IDeviceRepository
+    public class DeviceRepository : EFRepositoryBase, IDeviceRepository
     {
-        private PaxEntities context;
-
         public DeviceRepository()
+            : base()
         {
-            context = new PaxEntities();
+
         }
 
         public IEnumerable<Device> GetDevices()
         {
-            return context.Devices;            
+            return Context.Devices;            
         }
 
         public Device GetDeviceByUnitID(int unitId)
         {
-            return context.Devices.FirstOrDefault(d => d.UnitID == unitId);
+            return Context.Devices.FirstOrDefault(d => d.UnitID == unitId);
         }
 
         public Device GetDeviceByDeviceID(int deviceId)
         {
-            return context.Devices.FirstOrDefault(d => d.DeviceID == deviceId);
+            return Context.Devices.FirstOrDefault(d => d.DeviceID == deviceId);
         }
 
         public void UpdateDevice(int unitId, string firmwareVersion, string serialNumber, int memorySize)

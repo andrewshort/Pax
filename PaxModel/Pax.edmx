@@ -4,27 +4,91 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PaxModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PaxModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="PaxModelStoreContainer">
+          <EntitySet Name="Command" EntityType="PaxModel.Store.Command" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Device" EntityType="PaxModel.Store.Device" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Track" EntityType="PaxModel.Store.Track" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Command_Device" Association="PaxModel.Store.FK_Command_Device">
+            <End Role="Device" EntitySet="Device" />
+            <End Role="Command" EntitySet="Command" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Track_Device" Association="PaxModel.Store.FK_Track_Device">
+            <End Role="Device" EntitySet="Device" />
+            <End Role="Track" EntitySet="Track" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Command">
+          <Key>
+            <PropertyRef Name="CommandID" />
+          </Key>
+          <Property Name="CommandID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CommandText" Type="varchar" Nullable="false" MaxLength="512" />
+          <Property Name="DeviceID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Device">
           <Key>
             <PropertyRef Name="DeviceID" />
           </Key>
-          <Property Name="DeviceID" Type="int" Nullable="false" />
+          <Property Name="DeviceID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="UnitID" Type="int" Nullable="false" />
           <Property Name="FirmwareVersion" Type="varchar" Nullable="false" MaxLength="5" />
           <Property Name="SerialNumber" Type="varchar" Nullable="false" MaxLength="10" />
           <Property Name="MemorySize" Type="int" Nullable="false" />
         </EntityType>
-      </Schema>
-    </edmx:StorageModels>
+        <EntityType Name="Track">
+          <Key>
+            <PropertyRef Name="TrackID" />
+          </Key>
+          <Property Name="TrackID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DeviceID" Type="int" Nullable="false" />
+          <Property Name="ReportDateTime" Type="datetime" Nullable="false" />
+          <Property Name="LatLon" Type="geometry" Nullable="false" />
+          <Property Name="Heading" Type="varchar" Nullable="false" MaxLength="2" />
+          <Property Name="EventCode" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="Mileage" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Command_Device">
+          <End Role="Device" Type="PaxModel.Store.Device" Multiplicity="1" />
+          <End Role="Command" Type="PaxModel.Store.Command" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="DeviceID" />
+            </Principal>
+            <Dependent Role="Command">
+              <PropertyRef Name="DeviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Track_Device">
+          <End Role="Device" Type="PaxModel.Store.Device" Multiplicity="1" />
+          <End Role="Track" Type="PaxModel.Store.Track" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="DeviceID" />
+            </Principal>
+            <Dependent Role="Track">
+              <PropertyRef Name="DeviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PaxModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="PaxEntities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="Devices" EntityType="PaxModel.Device" />
+          <EntitySet Name="Commands" EntityType="PaxModel.Command" />
+          <EntitySet Name="Tracks" EntityType="PaxModel.Track" />
+          <AssociationSet Name="FK_Command_Device" Association="PaxModel.FK_Command_Device">
+            <End Role="Device" EntitySet="Devices" />
+            <End Role="Command" EntitySet="Commands" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Track_Device" Association="PaxModel.FK_Track_Device">
+            <End Role="Device" EntitySet="Devices" />
+            <End Role="Track" EntitySet="Tracks" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Device">
           <Key>
@@ -35,7 +99,56 @@
           <Property Name="FirmwareVersion" Type="String" Nullable="false" MaxLength="5" Unicode="false" FixedLength="false" />
           <Property Name="SerialNumber" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
           <Property Name="MemorySize" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Commands" Relationship="PaxModel.FK_Command_Device" FromRole="Device" ToRole="Command" />
+          <NavigationProperty Name="Tracks" Relationship="PaxModel.FK_Track_Device" FromRole="Device" ToRole="Track" />
         </EntityType>
+        <EntityType Name="Command">
+          <Key>
+            <PropertyRef Name="CommandID" />
+          </Key>
+          <Property Type="Int32" Name="CommandID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="CommandText" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="DeviceID" Nullable="false" />
+          <NavigationProperty Name="Device" Relationship="PaxModel.FK_Command_Device" FromRole="Command" ToRole="Device" />
+        </EntityType>
+        <EntityType Name="Track">
+          <Key>
+            <PropertyRef Name="TrackID" />
+          </Key>
+          <Property Type="Int32" Name="TrackID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="DeviceID" Nullable="false" />
+          <Property Type="DateTime" Name="ReportDateTime" Nullable="false" Precision="3" />
+          <Property Type="Geometry" Name="LatLon" Nullable="false" />
+          <Property Type="String" Name="Heading" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="EventCode" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="Int32" Name="Mileage" Nullable="false" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Device" Relationship="PaxModel.FK_Track_Device" FromRole="Track" ToRole="Device" />
+        </EntityType>
+        <Association Name="FK_Command_Device">
+          <End Type="PaxModel.Device" Role="Device" Multiplicity="1" />
+          <End Type="PaxModel.Command" Role="Command" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="DeviceID" />
+            </Principal>
+            <Dependent Role="Command">
+              <PropertyRef Name="DeviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Track_Device">
+          <End Type="PaxModel.Device" Role="Device" Multiplicity="1" />
+          <End Type="PaxModel.Track" Role="Track" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="DeviceID" />
+            </Principal>
+            <Dependent Role="Track">
+              <PropertyRef Name="DeviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -50,6 +163,29 @@
                 <ScalarProperty Name="FirmwareVersion" ColumnName="FirmwareVersion" />
                 <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
                 <ScalarProperty Name="MemorySize" ColumnName="MemorySize" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Commands">
+            <EntityTypeMapping TypeName="PaxModel.Command">
+              <MappingFragment StoreEntitySet="Command">
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="CommandText" ColumnName="CommandText" />
+                <ScalarProperty Name="CommandID" ColumnName="CommandID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tracks">
+            <EntityTypeMapping TypeName="PaxModel.Track">
+              <MappingFragment StoreEntitySet="Track">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Mileage" ColumnName="Mileage" />
+                <ScalarProperty Name="EventCode" ColumnName="EventCode" />
+                <ScalarProperty Name="Heading" ColumnName="Heading" />
+                <ScalarProperty Name="LatLon" ColumnName="LatLon" />
+                <ScalarProperty Name="ReportDateTime" ColumnName="ReportDateTime" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="TrackID" ColumnName="TrackID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

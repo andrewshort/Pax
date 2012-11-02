@@ -26,5 +26,7 @@ namespace PaxModel
         }
     
         public DbSet<Device> Devices { get; set; }
+        public DbSet<Command> Commands { get; set; }
+        public DbSet<Track> Tracks { get; set; }
     }
 }
