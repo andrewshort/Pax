@@ -67,6 +67,8 @@
     <Compile Include="Model\Enum\EventType.cs" />
     <Compile Include="Model\Interfaces\IAvrmcObject.cs" />
     <Compile Include="Model\Interfaces\IAvsysObject.cs" />
+    <Compile Include="Packet\CommandService.cs" />
+    <Compile Include="Packet\ICommandService.cs" />
     <Compile Include="Packet\IMessageBuilder.cs" />
     <Compile Include="Packet\IMessageWriter.cs" />
     <Compile Include="Packet\MessageBuilder.cs" />

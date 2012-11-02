@@ -44,7 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandRepository.cs" />
     <Compile Include="DeviceRepository.cs" />
+    <Compile Include="EFRepositoryBase.cs" />
+    <Compile Include="Interfaces\ICommandRepository.cs" />
     <Compile Include="Interfaces\IDeviceRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

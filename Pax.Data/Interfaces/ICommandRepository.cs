@@ -9,6 +9,6 @@ namespace Pax.Data.Interfaces
 {
     public interface ICommandRepository
     {
-        public IEnumerable<Command> GetCommands();
+        IEnumerable<Command> GetCommands();
     }
 }

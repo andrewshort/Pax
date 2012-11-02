@@ -85,6 +85,7 @@ namespace PaxService
             container.Bind<IEchkHandler>().To<EChkHandler>();
 
             container.Bind<IDeviceRepository>().To<DeviceRepository>();
+            container.Bind<ICommandRepository>().To<CommandRepository>();
 
             container.Bind<ICommandService>().To<CommandService>().InSingletonScope();
         }
