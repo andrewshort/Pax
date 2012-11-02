@@ -23,10 +23,14 @@ namespace ServiceTests
         [TestInitialize]
         public void Setup()
         {
-            var container = new StandardKernel();
-            ContainerManager.Container = container;
+            if (ContainerManager.Container == null)
+            {
+                var container = new StandardKernel();
+                ContainerManager.Container = container;
 
-            container.Bind<IAvsysObject>().To<AvsysObject>();
+                container.Bind<IAvsysObject>().To<AvsysObject>();
+                container.Bind<IAvrmcObject>().To<AvrmcObject>();
+            }
 
             _checkSumMock = new Mock<ICheckSum>();
             _checkSumMock.Setup(c => c.IsValid(It.IsAny<string>())).Returns(true);
@@ -55,6 +59,20 @@ namespace ServiceTests
 
             avsysParser = new AvsysParser(_checkSumInvalidMock.Object);
             Assert.IsNull(avsysParser.Parse(sentence));
+        }
+
+        [TestMethod]
+        public void TestAvrmc()
+        {
+            var avmrcParser = new AvrmcParser(_checkSumMock.Object);
+
+            string sentence = "AVRMC,90006400,165039,A,4000.4663,N,08556.4742,W,0.10,150.43,301211,0,4033,0  ,1,0,0*1F";
+
+            IAvrmcObject avrmc = avmrcParser.Parse(sentence);
+
+            Assert.AreEqual(avrmc.UnitId, "90006400");
+
+
         }
     }
 }
